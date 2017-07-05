@@ -3,6 +3,7 @@ require './lib/bike'
 
 class DockingStation
   attr_reader :bikes
+  DEFAULT_CAPACITY = 20
 
   def initialize
     @bikes = []
@@ -25,6 +26,6 @@ class DockingStation
   end
 
   def full?
-    return @bikes.length >= 20 ? true : false
+    return @bikes.length >= DEFAULT_CAPACITY ? true : false
   end
 end
