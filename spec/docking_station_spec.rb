@@ -13,26 +13,24 @@ describe DockingStation do
   it 'docks a bike at the station and shows bikes currently docked there' do
     bike = Bike.new
     station.dock(bike)
-    expect(station.bike).to eq(bike)
+    expect(station.bikes).to include(bike)
   end
 
   it 'responds to a docking method' do
     expect(station).to respond_to(:dock).with(1).argument
   end
 
-  it 'responds to .bike method' do
-    expect(station).to respond_to(:bike)
+  it 'responds to .bikes method' do
+    expect(station).to respond_to(:bikes)
   end
 
   it 'raises Error when there are no bikes' do
     expect {station.release_bike}.to raise_error("Sorry, no bikes available")
   end
 
-  it 'raises an error when docking more than one bike at the station' do
-    bike = Bike.new
-    station.dock(bike)
-    bike2 = Bike.new
-    expect {station.dock(bike2)}.to raise_error("No capacity available to dock bike!")
+  it 'raises an error when docking more than 20 bikes at the station' do
+    20.times { station.dock Bike.new }
+    expect {station.dock(Bike.new)}.to raise_error("No capacity available to dock bike!")
   end
 
 end
