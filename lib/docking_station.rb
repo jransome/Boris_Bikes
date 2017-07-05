@@ -16,9 +16,10 @@ class DockingStation
     @bikes.pop
   end
 
-  def dock bike
+  def dock bike, working
     fail("No capacity available to dock bike!") if full?
     @bikes << bike
+    
   end
 
   private
