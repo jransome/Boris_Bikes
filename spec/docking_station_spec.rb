@@ -38,4 +38,17 @@ describe DockingStation do
     expect {station.dock(Bike.new)}.to raise_error("No capacity available to dock bike!")
   end
 
+  it 'has a default capacity' do
+    expect(station.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
+  it 'has a definable capacity' do
+    custom_capacity = 132
+    ds = DockingStation.new(custom_capacity)
+    custom_capacity.times do
+      ds.dock(Bike.new)
+    end
+    expect {ds.dock(Bike.new)}.to raise_error("No capacity available to dock bike!")
+  end
+
 end
