@@ -4,8 +4,10 @@ describe DockingStation do
   it { is_expected.to respond_to(:release_bike)}
 
   it 'returns an instance of Bike when released_bike is called and that the bike is working' do
-    expect(subject.release_bike).to be_an_instance_of(Bike)
-    expect(Bike.new.working?).to eq(true)
+    if station.docked_bikes != nil
+      expect(subject.release_bike).to be_an_instance_of(Bike)
+      expect(Bike.new.working?).to eq(true)
+    end
   end
 
   it 'docks a bike at the station and shows bikes currently docked there' do
@@ -20,6 +22,12 @@ describe DockingStation do
 
   it 'responds to .docked_bikes method' do
     expect(station).to respond_to(:docked_bikes)
+  end
+
+  it 'raises Error when there are no bikes' do
+    if station.docked_bikes == nil
+      expect {station.release_bike}.to raise_error("Sorry, no bikes available")
+    end
   end
 
 end

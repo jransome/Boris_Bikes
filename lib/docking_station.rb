@@ -4,7 +4,11 @@ class DockingStation
   attr_reader :docked_bikes
 
   def release_bike
-    Bike.new
+    if @docked_bikes == nil
+      fail("Sorry, no bikes available")
+    else
+      @docked_bikes
+    end
   end
 
   def dock_bike bike
