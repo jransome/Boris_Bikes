@@ -1,18 +1,19 @@
 require './lib/bike'
 
 class DockingStation
-  attr_reader :docked_bikes
+  attr_reader :bike
 
   def release_bike
-    if @docked_bikes == nil
+    if @bike == nil
       fail("Sorry, no bikes available")
     else
-      @docked_bikes
+      @bike
     end
   end
 
-  def dock_bike bike
-    @docked_bikes = bike
+  def dock bike
+    fail("No capacity available to dock bike!") if @bike != nil
+    @bike = bike
   end
 
 end
